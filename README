@@ -1,0 +1,60 @@
+
+ed25519_vrfy
+============
+
+This is ed25519_vrfy, a simple, standalone, and not very fast
+ed25519 signature verifier in less than 500 lines of code.
+
+No external libraries needed! (Ok, you do need a sha256 digest
+implementation as well.)
+
+
+API
+===
+----
+unsigned char pub[32];       // ed25519 pubkey
+unsigned char sig[64];       // signature to verify
+unsigned char datahash[64];  // sha256 digest of sig[0..31] pub[0..31] data
+
+int result = ed25519_vrfy(pub, sig, datahash); // success: 1, failure: 0
+----
+
+FAQ
+===
+
+=== Why did you write this?
+
+This code was written to learn about how elliptic curve
+cryptography works. Also, most implementations are quite
+big because they support both signing and verifying.
+I tried to make the code as small as possible without
+sacrifying too much speed.
+
+=== Should I use the code in my production system?
+
+While Dan Bernstein designed the ed2259 scheme in a way
+that minimizes simple implementation errors, nobody
+reviewed the code. It successfully verifies the test
+signatures from the openssl package, but that does not
+mean it works correctly in all circumstances.
+
+=== What about side channel attacks?
+
+The code implements signature verification only. This
+means, that no secret data is used and thus side channel
+attacks do not gain anything.
+
+Copyright
+=========
+Copyright (c) 2020, SUSE LLC.
+
+This program is licensed under the BSD license, read LICENSE.BSD
+for further information
+
+Author
+======
+Michael Schroeder
+
+////
+vim: syntax=asciidoc
+////
