@@ -5,7 +5,7 @@ ed25519_vrfy
 This is ed25519_vrfy, a simple, standalone, and not very fast
 ed25519 signature verifier in less than 500 lines of code.
 
-No external libraries needed! (Ok, you do need a sha256 digest
+No external libraries needed! (Ok, you do need a sha512 digest
 implementation as well.)
 
 
@@ -14,7 +14,7 @@ API
 ----
 unsigned char pub[32];       // ed25519 pubkey
 unsigned char sig[64];       // signature to verify
-unsigned char datahash[64];  // sha256 digest of sig[0..31] pub[0..31] data
+unsigned char datahash[64];  // sha512 digest of sig[0..31] pub[0..31] data
 
 int result = ed25519_vrfy(pub, sig, datahash); // success: 1, failure: 0
 ----
