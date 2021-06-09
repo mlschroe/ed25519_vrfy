@@ -98,7 +98,7 @@ static inline void mpsubmod(int len, mp_t *target, const mp_t *mod)
   ED25519_CONST1(d), ED25519_CONST1(c), ED25519_CONST1(b), ED25519_CONST1(a) \
 }
 
-static const mp_t ed25519_q[] =		/* mod prime */
+static const mp_t ed25519_q[] =		/* mod prime 2^255 - 19 */
   ED25519_CONST(0x7fffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffed);
 static const mp_t ed25519_d[] = 	/* -(121665/121666) */
   ED25519_CONST(0x52036cee, 0x2b6ffe73, 0x8cc74079, 0x7779e898, 0x00700a4d, 0x4141d8ab, 0x75eb4dca, 0x135978a3);
@@ -257,6 +257,7 @@ ed25519_inv(mp_t *target, const mp_t *a)
 }
 
 /* target = 512 bit input modulo ed25519_l */
+/* algorithm: barrett reduction */
 static void
 ed25519_reduce512_l(mp_t *target, const mp_t *a)
 {
