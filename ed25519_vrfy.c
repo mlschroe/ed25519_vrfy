@@ -478,7 +478,7 @@ ed25519_vrfy(const unsigned char *pub, const unsigned char *sig, const unsigned 
   /* calculate h = H(sig[0..31]|pub|data) mod l */
   ed25519_setfromle(ED25519_LEN * 2, h2, datahash, 64, 0xff);
   ed25519_reduce512_l(h, h2);
-  /* calculate r = s * G - h * pub */
+  /* calculate r = s * G + h * -pub */
   if (!ed25519_scmult2(r_x, r_y, s, ed25519_gx, ed25519_gy, h, pub_x, pub_y))
     return 0;
   /* compress r into rbuf and verify that it matches sig */
