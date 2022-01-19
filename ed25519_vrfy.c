@@ -21,7 +21,7 @@
  * unsigned char sig[64];	// signature to verify
  * unsigned char datahash[64];	// sha512 digest of sig[0..31] pub[0..31] data
  *
- * int result = ed25519_vrfy(pub, sig, hash);	// success: 1, failure: 0
+ * int result = ed25519_vrfy(pub, sig, datahash);	// success: 1, failure: 0
  *
  */
 
